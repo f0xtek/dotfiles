@@ -61,6 +61,7 @@ ZSH_THEME="half-life"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -81,9 +82,6 @@ export TERM="xterm-256color"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
-export EDITOR='vim'
-export PICO_SDK_PATH="$HOME/pico/pico-sdk"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
