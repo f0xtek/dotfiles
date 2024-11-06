@@ -108,7 +108,9 @@ function pico_load() {
 
 #source  ~/bin/tmux-completion/tmux
 export PATH="$PATH:/opt/nvim-linux64/bin"
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 export PATH="$PATH:$HOME/.cargo/bin"
-#. "$HOME/.asdf/asdf.sh"
 
+
+# Created by `pipx` on 2024-11-06 11:37:04
+export PATH="$PATH:/home/luke/.local/bin"
