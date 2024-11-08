@@ -98,9 +98,7 @@ export TERM="xterm-256color"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ls='ls -lh --color=auto'
-alias uart='sudo minicom -D /dev/ttyACM0 -b 115200'
-alias vim='nvim'
+source ~/.zsh_aliases
 
 function pico_load() {
   sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program $1 verify reset exit"

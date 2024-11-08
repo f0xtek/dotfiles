@@ -1,0 +1,11 @@
+alias ls='ls -lh --color=auto'
+alias uart='sudo minicom -D /dev/ttyACM0 -b 115200'
+alias vim='nvim'
+
+# git aliases
+alias gp='git pull'
+alias gs='git status'
+alias gpsh='git push'
+alias gl='git log'
+alias gc='git commit'
+alias gcam='git commit -am'
