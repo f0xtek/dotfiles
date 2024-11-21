@@ -105,6 +105,7 @@ function pico_load() {
 }
 
 #source  ~/bin/tmux-completion/tmux
+export AWS_PAGER=''
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 export PATH="$PATH:$HOME/.cargo/bin"
