@@ -21,3 +21,5 @@ alias tl='tmux list-sessions'
 
 # misc
 alias lg='lazygit'
+alias vmstarth='VBoxManager startvm --type=headless'
+function vmstop() { VBoxManage controlvm  shutdown }
