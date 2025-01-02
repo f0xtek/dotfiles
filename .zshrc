@@ -1,7 +1,4 @@
 fpath+=($HOME/.zsh/pure)
-autoload -Uz promptinit
-promptinit
-prompt pure
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -12,7 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="half-life"
+ZSH_THEME="amuse"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -113,3 +110,7 @@ export PATH="$PATH:$HOME/.cargo/bin"
 
 # Created by `pipx` on 2024-11-06 11:37:04
 export PATH="$PATH:/home/luke/.local/bin"
+
+#autoload -Uz promptinit
+#promptinit
+#prompt pure
