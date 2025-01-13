@@ -119,7 +119,7 @@ export PATH="$PATH:$HOME/.cargo/bin"
 
 
 # Created by `pipx` on 2024-11-06 11:37:04
-export PATH="$PATH:/home/luke/.local/bin"
+export PATH="$PATH:/home/luke/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
