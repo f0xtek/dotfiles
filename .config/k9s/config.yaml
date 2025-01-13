@@ -1,0 +1,13 @@
+# $XDG_CONFIG_HOME/k9s/config.yaml
+k9s:
+  # Represents ui poll intervals. Default 2secs
+  refreshRate: 2
+  # Number of retries once the connection to the api-server is lost. Default 15.
+  maxConnRetry: 5
+  ui:
+    # Set to true to hide the K9S logo Default false
+    logoless: true
+    noIcons: false
+  logger:
+    # Defines the number of lines to return. Default 100
+    tail: 200
