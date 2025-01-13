@@ -23,3 +23,6 @@ alias tl='tmux list-sessions'
 alias lg='lazygit'
 function vmstarth() { VBoxManage startvm --type=headless $1 }
 function vmstop() { VBoxManage controlvm $1 shutdown }
+
+alias kctx='kubectl ctx'
+alias kns='kubectl ns'
