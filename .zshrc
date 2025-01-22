@@ -123,3 +123,7 @@ export PATH="$PATH:/home/luke/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# Created by `pipx` on 2025-01-17 14:41:41
+export PATH="$PATH:/home/f0xtek/.local/bin"
