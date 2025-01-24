@@ -111,12 +111,11 @@ function pico_load() {
   sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program $1 verify reset exit"
 }
 
-#source  ~/bin/tmux-completion/tmux
 export AWS_PAGER=''
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 export PATH="$PATH:$HOME/.cargo/bin"
-
+export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
 
 # Created by `pipx` on 2024-11-06 11:37:04
 export PATH="$PATH:/home/luke/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin"
@@ -124,6 +123,3 @@ export PATH="$PATH:/home/luke/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
-# Created by `pipx` on 2025-01-17 14:41:41
-export PATH="$PATH:/home/f0xtek/.local/bin"
