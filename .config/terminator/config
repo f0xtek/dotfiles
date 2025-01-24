@@ -1,0 +1,41 @@
+[global_config]
+  dbus = False
+  window_state = maximise
+[keybindings]
+  split_horiz = <Super>h
+  split_vert = <Super>v
+  toggle_zoom = <Super>z
+  switch_to_tab_1 = <Alt>1
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_4 = <Alt>4
+  switch_to_tab_5 = <Alt>5
+  switch_to_tab_6 = <Alt>6
+  switch_to_tab_7 = <Alt>7
+  switch_to_tab_8 = <Alt>8
+  switch_to_tab_9 = <Alt>9
+  hide_window = <Shift><Control>a
+[profiles]
+  [[default]]
+    background_color = "#1E2B2E"
+    background_darkness = 1.0
+    background_type = transparent
+    font = MesloLGS NF 12
+    foreground_color = "#BECFCF"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 5000
+    scrollback_infinite = True
+    palette = "#555753:#b44444:#5ecb8c:#d9c964:#3d6aac:#9a64d9:#64d9d5:#d3d7cf:#babdb6:#d98f93:#13b9b9:#d9cf8f:#8f99d9:#b08fd9:#8fd9d5:#c5c5c5"
+    use_system_font = False
+    copy_on_selection = True
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      size = 680, 535
+      type = Window
+[plugins]
