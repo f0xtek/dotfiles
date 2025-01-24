@@ -26,3 +26,5 @@ function vmstop() { VBoxManage controlvm $1 shutdown }
 
 alias kctx='kubectl ctx'
 alias kns='kubectl ns'
+
+alias awsid='aws sts get-caller-identity'
