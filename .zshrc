@@ -116,6 +116,7 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:${KREW_ROOT:-$HOME/.krew}/bin"
+export PATH="$PATH:/home/f0xtek/.ebcli-virtual-env/executables"
 
 # Created by `pipx` on 2024-11-06 11:37:04
 export PATH="$PATH:$HOME/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin"
