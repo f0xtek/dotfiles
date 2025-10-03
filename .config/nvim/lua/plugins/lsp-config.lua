@@ -39,47 +39,46 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
+			vim.lsp.config("lua_ls", {
 				capabilities = capabilities,
 			})
-			lspconfig.ansiblels.setup({
+			vim.lsp.config("ansiblels", {
 				capabilities = capabilities,
 			})
-			lspconfig.bashls.setup({
+			vim.lsp.config("bashls", {
 				capabilities = capabilities,
 			})
-			lspconfig.clangd.setup({
+			vim.lsp.config("clangd", {
 				capabilities = capabilities,
 			})
-			lspconfig.cmake.setup({
+			vim.lsp.config("cmake", {
 				capabilities = capabilities,
 			})
-			lspconfig.cssls.setup({
+			vim.lsp.config("cssls", {
 				capabilities = capabilities,
 			})
-			lspconfig.gopls.setup({
+			vim.lsp.config("gopls", {
 				capabilities = capabilities,
 			})
-			lspconfig.html.setup({
+			vim.lsp.config("html", {
 				capabilities = capabilities,
 			})
-			lspconfig.jsonls.setup({
+			vim.lsp.config("jsonls", {
 				capabilities = capabilities,
 			})
-			lspconfig.ts_ls.setup({
+			vim.lsp.config("ts_ls", {
 				capabilities = capabilities,
 			})
-			lspconfig.pylsp.setup({
+			vim.lsp.config("pylsp", {
 				capabilities = capabilities,
 			})
-			lspconfig.ruff.setup({
+			vim.lsp.config("ruff", {
 				capabilities = capabilities,
 			})
-			lspconfig.terraformls.setup({
+			vim.lsp.config("terraformls", {
 				capabilities = capabilities,
 			})
-			lspconfig.yamlls.setup({
+			vim.lsp.config("yamlls", {
 				capabilities = capabilities,
 				schemas = {
 					kubernetes = "*.yaml",
