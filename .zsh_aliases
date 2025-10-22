@@ -28,3 +28,6 @@ alias kctx='kubectl ctx'
 alias kns='kubectl ns'
 
 alias awsid='aws sts get-caller-identity'
+
+islegit() { echo "$2  $1" | sha256sum -c --status && echo "✅ SHA-256 hash match" || echo "❌ SHA-256 hash mis-match"; }
+
