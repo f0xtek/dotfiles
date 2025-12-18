@@ -1,11 +1,11 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
-fpath+=($HOME/.zsh/pure)
+#fpath+=($HOME/.zsh/pure)
 #autoload -Uz promptinit
 #promptinit
 #prompt pure
@@ -19,7 +19,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -122,7 +122,7 @@ export PATH="$PATH:/home/f0xtek/.ebcli-virtual-env/executables"
 export PATH="$PATH:$HOME/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
 export NVM_DIR="$HOME/.nvm"
@@ -131,3 +131,69 @@ export NVM_DIR="$HOME/.nvm"
 
 # add Pulumi to the PATH
 export PATH=$PATH:/home/f0xtek/.pulumi/bin
+
+# prompt stuff
+autoload -Uz vcs_info
+
+precmd() {
+  vcs_info
+}
+
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' unstagedstr '*'
+zstyle ':vcs_info:git:*' stagedstr '+'
+
+# IMPORTANT: use %u and %c (not %m)
+zstyle ':vcs_info:git:*' formats '%b%u%c'
+zstyle ':vcs_info:git:*' actionformats '%b|%a%u%c'
+
+LAST_CMD=""
+
+preexec() {
+  LAST_CMD="${1%% *}"
+}
+
+aws_context() {
+  case "$LAST_CMD" in
+    aws|terraform|cdk)
+      [[ -n "$AWS_PROFILE" || -n "$AWS_DEFAULT_REGION" || -n "$AWS_REGION" ]] || return
+
+      local profile="${AWS_PROFILE:-default}"
+      #local region="${AWS_DEFAULT_REGION:-$AWS_REGION}"
+      local region="${AWS_DEFAULT_REGION:-${AWS_REGION:-$(aws configure get region 2>/dev/null)}}"
+
+      [[ -n "$region" ]] \
+        && echo " [aws:${profile}/${region}]" \
+        || echo " [aws:${profile}]"
+    ;;
+  esac
+}
+
+# Only enable colour if the terminal supports it
+if [[ "$TERM" != "dumb" ]]; then
+  RESET='%f'
+  PATH_COLOR='%F{blue}'
+  GIT_CLEAN='%F{green}'
+  GIT_DIRTY='%F{yellow}'
+#  AWS_COLOR='%F{cyan}'
+else
+  RESET=''
+  PATH_COLOR=''
+  GIT_COLOR=''
+#  AWS_COLOR=''
+fi
+
+git_prompt() {
+  [[ -z "$vcs_info_msg_0_" ]] && return
+
+  if [[ "$vcs_info_msg_0_" == *"*"* || "$vcs_info_msg_0_" == *"+"* ]]; then
+    echo " (${GIT_DIRTY}${vcs_info_msg_0_}${RESET})"
+  else
+    echo " (${GIT_CLEAN}${vcs_info_msg_0_}${RESET})"
+  fi
+}
+
+setopt PROMPT_SUBST
+#PROMPT=$'${PATH_COLOR}%~${RESET}$(git_prompt)${AWS_COLOR}$(aws_context)${RESET}\n%# '
+PROMPT=$'${PATH_COLOR}%~${RESET}$(git_prompt)${RESET}\n%# '
+
