@@ -135,17 +135,31 @@ export PATH=$PATH:/home/f0xtek/.pulumi/bin
 # prompt stuff
 autoload -Uz vcs_info
 
-precmd() {
-  vcs_info
-}
-
 zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' check-for-staged-changes true
+
+# Change markers
 zstyle ':vcs_info:git:*' unstagedstr '*'
 zstyle ':vcs_info:git:*' stagedstr '+'
 
-# IMPORTANT: use %u and %c (not %m)
+# Ahead / behind
+zstyle ':vcs_info:git:*' use-simple true
+zstyle ':vcs_info:git:*' max-exports 2
+
+# Format parts:
+# %b = branch
+# %u = unstaged
+# %c = staged
+# %a = action (rebase, merge)
+# %p = patches (unused here)
+# %m = misc (unused)
+# %r/%S = remote info
 zstyle ':vcs_info:git:*' formats '%b%u%c'
 zstyle ':vcs_info:git:*' actionformats '%b|%a%u%c'
+
+precmd() {
+  vcs_info
+}
 
 LAST_CMD=""
 
@@ -169,31 +183,69 @@ aws_context() {
   esac
 }
 
-# Only enable colour if the terminal supports it
 if [[ "$TERM" != "dumb" ]]; then
   RESET='%f'
+
   PATH_COLOR='%F{blue}'
-  GIT_CLEAN='%F{green}'
-  GIT_DIRTY='%F{yellow}'
-#  AWS_COLOR='%F{cyan}'
+
+  GIT_BRANCH_CLEAN='%F{green}'
+  GIT_UNSTAGED='%F{yellow}'   # orange-ish
+  GIT_STAGED='%F{cyan}'
+
+  GIT_AHEAD='%F{green}'
+  GIT_BEHIND='%F{red}'
+
+  AWS_COLOR='%F{cyan}'
 else
   RESET=''
   PATH_COLOR=''
-  GIT_COLOR=''
-#  AWS_COLOR=''
+  GIT_BRANCH_CLEAN=''
+  GIT_UNSTAGED=''
+  GIT_STAGED=''
+  GIT_AHEAD=''
+  GIT_BEHIND=''
+  AWS_COLOR=''
 fi
+
+
+git_ahead_behind() {
+  command git rev-parse --abbrev-ref @{upstream} >/dev/null 2>&1 || return
+
+  local ahead behind
+  ahead=$(command git rev-list --count @{upstream}..HEAD 2>/dev/null)
+  behind=$(command git rev-list --count HEAD..@{upstream} 2>/dev/null)
+
+  [[ "$ahead" -gt 0 ]] && echo -n " ${GIT_AHEAD}↑${ahead}${RESET}"
+  [[ "$behind" -gt 0 ]] && echo -n " ${GIT_BEHIND}↓${behind}${RESET}"
+}
 
 git_prompt() {
   [[ -z "$vcs_info_msg_0_" ]] && return
 
-  if [[ "$vcs_info_msg_0_" == *"*"* || "$vcs_info_msg_0_" == *"+"* ]]; then
-    echo " (${GIT_DIRTY}${vcs_info_msg_0_}${RESET})"
+  local branch="${vcs_info_msg_0_%%[*+]}"
+  local rest="${vcs_info_msg_0_#$branch}"
+
+  echo -n " ("
+
+  # Branch name colour
+  if [[ "$rest" == *"*"* || "$rest" == *"+"* ]]; then
+    echo -n "${GIT_BRANCH_CLEAN}${branch}${RESET}"
   else
-    echo " (${GIT_CLEAN}${vcs_info_msg_0_}${RESET})"
+    echo -n "${GIT_BRANCH_CLEAN}${branch}${RESET}"
   fi
+
+  # Unstaged
+  [[ "$rest" == *"*"* ]] && echo -n "${GIT_UNSTAGED}*${RESET}"
+
+  # Staged
+  [[ "$rest" == *"+"* ]] && echo -n "${GIT_STAGED}+${RESET}"
+
+  # Ahead / behind
+  git_ahead_behind
+
+  echo -n ")"
 }
 
 setopt PROMPT_SUBST
-#PROMPT=$'${PATH_COLOR}%~${RESET}$(git_prompt)${AWS_COLOR}$(aws_context)${RESET}\n%# '
-PROMPT=$'${PATH_COLOR}%~${RESET}$(git_prompt)${RESET}\n%# '
+PROMPT=$'${PATH_COLOR}%~${RESET}$(git_prompt)${AWS_COLOR}$(aws_context)${RESET}\n%# '
 
