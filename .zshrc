@@ -249,3 +249,5 @@ git_prompt() {
 setopt PROMPT_SUBST
 PROMPT=$'${PATH_COLOR}%~${RESET}$(git_prompt)${AWS_COLOR}$(aws_context)${RESET}\n%# '
 
+# Created by `pipx` on 2025-01-03 11:32:42
+export PATH="$PATH:/home/f0xtek/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
