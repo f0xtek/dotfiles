@@ -125,12 +125,15 @@ export PATH="$PATH:$HOME/.local/bin:${KREW_ROOT:-$HOME/.krew}/bin"
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # add Pulumi to the PATH
 export PATH=$PATH:/home/f0xtek/.pulumi/bin
+
+# asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # prompt stuff
 autoload -Uz vcs_info
